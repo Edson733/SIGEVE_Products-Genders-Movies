@@ -1,22 +1,23 @@
 const express = require('express');
 const cors = require('cors');
 const { productRouter } = require('../modules/controller/router')
-require ('dotenv').config();
+require ('dotenv').config(); //Importaciones
 
-const app = express();
-
+const app = express(); //Instanciar server
 app.set("port", process.env.PORT || 3000);
 
-app.use(cors({origins: '*'}));
+//Middlewares
+app.use(cors({origins: '*'})); //Permite recibir cualquier peticion con X origen
+app.use(express.json({limit: '50mb'})); //Permite peticiones hasta 50mb
 
-app.use(express.json({limit: '50mb'}));
-
+//Routes
 app.get("/", (request, response) => {
     response.send("Bienvenido a products_node");
 });
 
-//app.use('/api/products', productRouter);
+//Endpoints
+app.use('/api/products', productRouter);
 
 module.exports = {
-    app
-};
+    app,
+}; //{app:app}

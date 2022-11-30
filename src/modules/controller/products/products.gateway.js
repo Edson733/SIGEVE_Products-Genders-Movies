@@ -6,8 +6,8 @@ const findAll = async () => {
 };
 
 const findById = async (id) => {
-    if (!id) throw Error('Missing fields');
     if (Number.isNaN(id)) throw Error('Wrong type');
+    if (!id) throw Error('Missing fields');
     const sql = `SELECT * FROM products WHERE id_product = ?;`;
     return await query(sql, [id]);
 };
@@ -15,7 +15,8 @@ const findById = async (id) => {
 const save = async (product) => {
     if (!product.name || !product.price) throw Error('Missing fields');
     const sql = `INSERT INTO products(name, price) VALUES(?, ?);`;
-    return await query(sql, [product.name, product.price]);
+    const {insertedId} = await query(sql, [product.name, product.price]);
+    return {...product, id: insertedId};
 };
 
 const update = async (product) => {
@@ -25,12 +26,12 @@ const update = async (product) => {
 };
 
 const remove = async (id) => {
-    if (!id) throw Error('Missing fields');
     if (Number.isNaN(id)) throw Error('Wrong type');
+    if (!id) throw Error('Missing fields');
     const sql = `DELETE FROM products WHERE id_product = ?;`;
     return await query(sql, [id]);
 };
 
 module.exports = {
-    findAll, findById, save, update, remove
+    findAll, findById, save, update, remove,
 };

@@ -30,12 +30,12 @@ const hashPassword = async (password) => {
     return await bcrypt.hash(password, salt);
 };
 
-const validatePassword = async (password, hashPassword) => {
-    return await bcrypt.compare(password, hashPassword);
+const validatePassword = async (password, hashedPassword) => {
+    return await bcrypt.compare(password, hashedPassword);
 };
 
 module.exports = {
     validateError,
     hashPassword,
-    validatePassword
+    validatePassword,
 };

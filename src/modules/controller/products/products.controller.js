@@ -66,8 +66,8 @@ productRouter.get(`/all`, [], getAll);
 productRouter.get(`/:id`, [], getById);
 productRouter.post(`/save`, [], insert);
 productRouter.put(`/update`, [], modific);
-productRouter.delete(`:id`, [], suprim);
+productRouter.delete(`/:id`, [], suprim);
 
 module.exports = {
-    productRouter
+    productRouter,
 };
