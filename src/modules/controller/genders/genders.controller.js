@@ -1,10 +1,21 @@
 const {Response, Router} = require("express");
-const {findAll, findById, save, update, remove} = require("./products.gateway");
+const {findAll, findEnable, findById, save, update, disable, enable} = require("./genders.gateway");
 const {validateError} = require("../../../utils/functions");
 
 const getAll = async (req, res = Response) => {
     try{
         const results = await findAll();
+        res.status(200).json(results);
+    }catch (err) {
+        console.log(err);
+        const message = validateError(err);
+        res.status(400).json({message});
+    }
+};
+
+const getEnable = async (req, res = Response) => {
+    try{
+        const results = await findEnable();
         res.status(200).json(results);
     }catch (err) {
         console.log(err);
@@ -27,8 +38,8 @@ const getById = async (req, res = Response) => {
 
 const insert = async (req, res = Response) => {
     try{
-        const {name_pdo, price} = req.body;
-        const results = await save({name_pdo, price});
+        const {id_gdr, name_gdr, status} = req.body;
+        const results = await save({id_gdr, name_gdr, status});
         res.status(200).json({results});
     }catch (err) {
         console.log(err);
@@ -39,8 +50,8 @@ const insert = async (req, res = Response) => {
 
 const modific = async (req, res = Response) => {
     try{
-        const {id_pdo, name_pdo, price} = req.body;
-        const results = await update({id_pdo, name_pdo, price});
+        const {name_gdr, status, id_gdr} = req.body;
+        const results = await update({name_gdr, status, id_gdr});
         res.status(200).json({results});
     }catch (err) {
         console.log(err);
@@ -49,10 +60,10 @@ const modific = async (req, res = Response) => {
     }
 };
 
-const suprim = async (req, res = Response) => {
+const disa = async (req, res = Response) => {
     try{
         const {id} = req.params;
-        const results = await remove(id);
+        const results = await disable(id);
         res.status(200).json(results);
     }catch (err) {
         console.log(err);
@@ -61,13 +72,27 @@ const suprim = async (req, res = Response) => {
     }
 };
 
-const productRouter = Router();
-productRouter.get(`/all`, [], getAll);
-productRouter.get(`/:id`, [], getById);
-productRouter.post(`/save`, [], insert);
-productRouter.put(`/update`, [], modific);
-productRouter.delete(`/:id`, [], suprim);
+const ena = async (req, res = Response) => {
+    try{
+        const {id} = req.params;
+        const results = await enable(id);
+        res.status(200).json(results);
+    }catch (err) {
+        console.log(err);
+        const message = validateError(err);
+        res.status(400).json({message});
+    }
+};
+
+const genderRouter = Router();
+genderRouter.get(`/all`, [], getAll);
+genderRouter.get(`/all/enable`, [], getEnable);
+genderRouter.get(`/:id`, [], getById);
+genderRouter.post(`/save`, [], insert);
+genderRouter.put(`/update`, [], modific);
+genderRouter.put(`/disable/:id`, [], disa);
+genderRouter.put(`/enable/:id`, [], ena);
 
 module.exports = {
-    productRouter,
+  genderRouter,
 };
