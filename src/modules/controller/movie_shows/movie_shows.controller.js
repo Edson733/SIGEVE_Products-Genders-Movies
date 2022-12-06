@@ -1,5 +1,5 @@
 const {Response, Router} = require("express");
-const {findAll, findEnable, findById, save, update, disable, enable} = require("./genders.gateway");
+const {findAll, findEnable, findById, save, update, disable, enable} = require("./movie_shows.gateway");
 const {validateError} = require("../../../utils/functions");
 
 const getAll = async (req, res = Response) => {
@@ -38,8 +38,8 @@ const getById = async (req, res = Response) => {
 
 const insert = async (req, res = Response) => {
     try{
-        const {id_gdr, name_gdr, status_gdr} = req.body;
-        const results = await save({id_gdr, name_gdr, status_gdr});
+        const {movie, room, start_show, end_show, date_show, availability_msw} = req.body;
+        const results = await save({movie, room, start_show, end_show, date_show, availability_msw});
         res.status(200).json({results});
     }catch (err) {
         console.log(err);
@@ -50,8 +50,8 @@ const insert = async (req, res = Response) => {
 
 const modific = async (req, res = Response) => {
     try{
-        const {name_gdr, status_gdr, id_gdr} = req.body;
-        const results = await update({name_gdr, status_gdr, id_gdr});
+        const {movie, room, start_show, end_show, date_show, availability_msw, id_msw} = req.body;
+        const results = await update({movie, room, start_show, end_show, date_show, availability_msw, id_msw});
         res.status(200).json({results});
     }catch (err) {
         console.log(err);
@@ -84,15 +84,15 @@ const ena = async (req, res = Response) => {
     }
 };
 
-const genderRouter = Router();
-genderRouter.get(`/all`, [], getAll);
-genderRouter.get(`/all/enable`, [], getEnable);
-genderRouter.get(`/:id`, [], getById);
-genderRouter.post(`/save`, [], insert);
-genderRouter.put(`/update`, [], modific);
-genderRouter.put(`/disable/:id`, [], disa);
-genderRouter.put(`/enable/:id`, [], ena);
+const movieShowsRouter = Router();
+movieShowsRouter.get(`/all`, [], getAll);
+movieShowsRouter.get(`/all/enable`, [], getEnable);
+movieShowsRouter.get(`/:id`, [], getById);
+movieShowsRouter.post(`/save`, [], insert);
+movieShowsRouter.put(`/update`, [], modific);
+movieShowsRouter.put(`/disable/:id`, [], disa);
+movieShowsRouter.put(`/enable/:id`, [], ena);
 
 module.exports = {
-  genderRouter,
+    movieShowsRouter,
 };

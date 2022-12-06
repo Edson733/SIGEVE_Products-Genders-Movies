@@ -1,5 +1,5 @@
 const {Response, Router} = require("express");
-const {findAll, findEnable, findById, save, update, disable, enable} = require("./genders.gateway");
+const {findAll, findEnable, findById, save, update, disable, enable} = require("./rooms.gateway");
 const {validateError} = require("../../../utils/functions");
 
 const getAll = async (req, res = Response) => {
@@ -38,8 +38,8 @@ const getById = async (req, res = Response) => {
 
 const insert = async (req, res = Response) => {
     try{
-        const {id_gdr, name_gdr, status_gdr} = req.body;
-        const results = await save({id_gdr, name_gdr, status_gdr});
+        const {number_room, status_room} = req.body;
+        const results = await save({number_room, status_room});
         res.status(200).json({results});
     }catch (err) {
         console.log(err);
@@ -50,8 +50,8 @@ const insert = async (req, res = Response) => {
 
 const modific = async (req, res = Response) => {
     try{
-        const {name_gdr, status_gdr, id_gdr} = req.body;
-        const results = await update({name_gdr, status_gdr, id_gdr});
+        const {number_room, status_room, id_room} = req.body;
+        const results = await update({number_room, status_room, id_room});
         res.status(200).json({results});
     }catch (err) {
         console.log(err);
@@ -84,15 +84,15 @@ const ena = async (req, res = Response) => {
     }
 };
 
-const genderRouter = Router();
-genderRouter.get(`/all`, [], getAll);
-genderRouter.get(`/all/enable`, [], getEnable);
-genderRouter.get(`/:id`, [], getById);
-genderRouter.post(`/save`, [], insert);
-genderRouter.put(`/update`, [], modific);
-genderRouter.put(`/disable/:id`, [], disa);
-genderRouter.put(`/enable/:id`, [], ena);
+const roomRouter = Router();
+roomRouter.get(`/all`, [], getAll);
+roomRouter.get(`/all/enable`, [], getEnable);
+roomRouter.get(`/:id`, [], getById);
+roomRouter.post(`/save`, [], insert);
+roomRouter.put(`/update`, [], modific);
+roomRouter.put(`/disable/:id`, [], disa);
+roomRouter.put(`/enable/:id`, [], ena);
 
 module.exports = {
-  genderRouter,
+    roomRouter,
 };
