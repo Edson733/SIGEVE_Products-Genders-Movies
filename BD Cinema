@@ -122,18 +122,18 @@ create table sales_tickets(
     total_count double not null,
     status_ste tinyint not null,
     foreign key(movie_show_ste) references movie_shows(id_msw),
-    foreign key(client_spo) references clients(id_cet)
+    foreign key(client_spo) references users(id_usr)
 );
 
-select sales_tickets.id_ste, sales_tickets.movie_show_ste, clients.name_cet, sales_tickets.total_count, sales_tickets.status_ste
-	from sales_tickets join movie_shows join clients on sales_tickets.movie_show_ste = movie_shows.id_msw
-    && sales_tickets.client_spo = clients.id_cet; -- All
-select sales_tickets.id_ste, sales_tickets.movie_show_ste, clients.name_cet, sales_tickets.total_count, sales_tickets.status_ste
-	from sales_tickets join movie_shows join clients on sales_tickets.movie_show_ste = movie_shows.id_msw
-    && sales_tickets.client_spo = clients.id_cet where id_ste = 1; -- Id
-select sales_tickets.id_ste, sales_tickets.movie_show_ste, clients.name_cet, sales_tickets.total_count, sales_tickets.status_ste
-	from sales_tickets join movie_shows join clients on sales_tickets.movie_show_ste = movie_shows.id_msw
-    && sales_tickets.client_spo = clients.id_cet where status_ste = 1; -- Status
+select sales_tickets.id_ste, sales_tickets.movie_show_ste, users.name_usr, sales_tickets.total_count, sales_tickets.status_ste
+	from sales_tickets join movie_shows join users on sales_tickets.movie_show_ste = movie_shows.id_msw
+    && sales_tickets.client_spo = users.id_usr; -- All
+select sales_tickets.id_ste, sales_tickets.movie_show_ste, users.name_usr, sales_tickets.total_count, sales_tickets.status_ste
+	from sales_tickets join movie_shows join users on sales_tickets.movie_show_ste = movie_shows.id_msw
+    && sales_tickets.client_spo = users.id_usr where id_ste = 1; -- Id
+select sales_tickets.id_ste, sales_tickets.movie_show_ste, users.name_usr, sales_tickets.total_count, sales_tickets.status_ste
+	from sales_tickets join movie_shows join users on sales_tickets.movie_show_ste = movie_shows.id_msw
+    && sales_tickets.client_spo = users.id_usr where status_ste = 1; -- Status
 insert into sales_tickets(movie_show_ste, client_spo, total_count, status_ste) values(1, 1, 45.0, 1); -- Save
 update sales_tickets set movie_show_ste = 1, client_spo = 1, total_count = 50.0, status_ste = 1 where id_ste = 1; -- Update
 update sales_tickets set status_ste = 0 where id_ste = 1; -- Inhabilitar
