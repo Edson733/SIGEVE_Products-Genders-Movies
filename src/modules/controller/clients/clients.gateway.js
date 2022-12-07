@@ -18,16 +18,16 @@ const findById = async (id) => {
 };
 
 const save = async (clients) => {
-    if (!clients.name_cet || !clients.email_cet || !clients.password_cet || !clients.status_cet) throw Error('Missing fields');
-    const sql = `INSERT INTO clients(name_cet, email_cet, password_cet, status_cet) VALUES(?, ?, ?, ?);`;
-    const {insertedId} = await query(sql, [clients.name_cet, clients.email_cet, clients.password_cet, clients.status_cet]);
+    if (!clients.name_cet || !clients.email_cet || !clients.password_cet || !clients.status_cet || !clients.role_cet) throw Error('Missing fields');
+    const sql = `INSERT INTO clients(name_cet, email_cet, password_cet, status_cet, role_cet) VALUES(?, ?, ?, ?, ?);`;
+    const {insertedId} = await query(sql, [clients.name_cet, clients.email_cet, clients.password_cet, clients.status_cet, clients.role_cet]);
     return {...clients, id: insertedId};
 };
 
 const update = async (clients) => {
-    if (!clients.name_cet || !clients.email_cet || !clients.password_cet || !clients.status_cet || !clients.id_cet) throw Error('Missing fields');
-    const sql = `UPDATE clients SET name_cet = ?, email_cet = ?, password_cet = ?, status_cet = ? WHERE id_cet = ?;`;
-    return await query(sql, [clients.name_cet, clients.email_cet, clients.password_cet, clients.status_cet, clients.id_cet]);
+    if (!clients.name_cet || !clients.email_cet || !clients.password_cet || !clients.status_cet || !clients.role_cet || !clients.id_cet) throw Error('Missing fields');
+    const sql = `UPDATE clients SET name_cet = ?, email_cet = ?, password_cet = ?, status_cet = ?, role_cet = ? WHERE id_cet = ?;`;
+    return await query(sql, [clients.name_cet, clients.email_cet, clients.password_cet, clients.status_cet, clients.role_cet, clients.id_cet]);
 };
 
 const disable = async (id) => {
