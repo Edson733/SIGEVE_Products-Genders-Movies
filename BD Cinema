@@ -94,18 +94,19 @@ update movie_shows set movie = 4, room = 1, start_show = "05:12:00", end_show = 
 update movie_shows set availability_msw = 0 where id_msw = 1; -- Inhabilitar
 update movie_shows set availability_msw = 1 where id_msw = 1; -- Habilitar
 
--- cet--------------------------------------------------------------------------
+-- usr--------------------------------------------------------------------------
 create table users(
 	id_usr int primary key not null auto_increment,
     name_usr varchar(100) not null,
-    email_usr varchar(100) not null,
+    email_usr varchar(256) unique not null,
     password_usr varchar(100) not null,
     status_usr tinyint not null,
     role_cet int not null,
-    saldo_usr double
+    saldo_usr double not null
 );
 
 select * from users; -- All
+select email_usr, password_usr from users where status_usr = 1;
 select * from users where id_usr = 1; -- Id
 select * from users where status_usr = 1; -- Status
 insert into users(name_usr, email_usr, password_usr, status_usr, role_usr, saldo_usr) values("Edson", "edson@gmail.com", "123456789", 1, 1, 200.0); -- Save
