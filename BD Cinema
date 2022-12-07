@@ -36,19 +36,20 @@ create table movies(
     duration double not null,
     gender int not null,
     availability_mve tinyint not null,
+    image_mve mediumtext NOT NULL,
     foreign key(gender) references genders(id_gdr)
 );
 
-select movies.id_mve, movies.name_mve, movies.duration, genders.name_gdr, movies.availability_mve
+select movies.id_mve, movies.name_mve, movies.duration, genders.name_gdr, movies.availability_mve, movies.image_mve
 	from movies join genders on movies.gender = genders.id_gdr; -- All
-select movies.id_mve, movies.name_mve, movies.duration, genders.name_gdr, movies.availability_mve
+select movies.id_mve, movies.name_mve, movies.duration, genders.name_gdr, movies.availability_mve, movies.image_mve
 	from movies join genders on movies.gender = genders.id_gdr where id_mve = 1; -- Id
-select movies.id_mve, movies.name_mve, movies.duration, genders.name_gdr, movies.availability_mve
+select movies.id_mve, movies.name_mve, movies.duration, genders.name_gdr, movies.availability_mve, movies.image_mve
 	from movies join genders on movies.gender = genders.id_gdr where availability_mve = 1; -- Status
-insert into movies(name_mve, duration, gender, availability_mve) values("Avengers: Infinity War", 149, 1, 1); -- Save
-update movies set name_mve = "Avengers: Infinity", duration = 150, gender = 1, availability_mve = 0 where id_mve = 4; -- Update
-update movies set availability_mve = 0 where id_mve = 4; -- Inhabilitar
-update movies set availability_mve = 1 where id_mve = 4; -- Habilitar
+insert into movies(name_mve, duration, gender, availability_mve, image_mve) values("Avengers: Infinity War", 149, 1, 1, ""); -- Save
+update movies set name_mve = "Avengers: War", duration = 152, gender = 1, availability_mve = 1, image_mve = "War" where id_mve = 5; -- Update
+update movies set availability_mve = 0 where id_mve = 5; -- Inhabilitar
+update movies set availability_mve = 1 where id_mve = 5; -- Habilitar
 
 -- rom--------------------------------------------------------------------------
 create table rooms(
