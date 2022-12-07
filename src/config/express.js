@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { genderRouter, movieRouter, roomRouter, movieShowsRouter, clientRouter, salesTicketsRouter } = require('../modules/controller/router')
+const { genderRouter, movieRouter, roomRouter, movieShowsRouter, userRouter, salesTicketsRouter } = require('../modules/controller/router')
 require ('dotenv').config(); //Importaciones
 
 const app = express(); //Instanciar server
@@ -20,7 +20,7 @@ app.use('/api/genders', genderRouter);
 app.use(`/api/movies`, movieRouter);
 app.use('/api/rooms', roomRouter);
 app.use('/api/movieshows', movieShowsRouter);
-app.use('/api/clients', clientRouter);
+app.use('/api/users', userRouter);
 app.use('/api/salestickets', salesTicketsRouter);
 
 module.exports = {
