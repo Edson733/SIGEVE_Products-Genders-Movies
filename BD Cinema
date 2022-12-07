@@ -101,7 +101,7 @@ create table users(
     email_usr varchar(256) unique not null,
     password_usr varchar(100) not null,
     status_usr tinyint not null,
-    role_cet int not null,
+    role_usr int not null,
     saldo_usr double not null
 );
 
