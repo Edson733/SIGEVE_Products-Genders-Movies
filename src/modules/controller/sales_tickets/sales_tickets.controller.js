@@ -1,5 +1,5 @@
 const {Response, Router} = require("express");
-const {findAll, findEnable, findById, save, update, disable, enable} = require("./rooms.gateway");
+const {findAll, findEnable, findById, save, update, disable, enable} = require("./sales_tickets.gateway");
 const {validateError} = require("../../../utils/functions");
 
 const getAll = async (req, res = Response) => {
@@ -38,8 +38,8 @@ const getById = async (req, res = Response) => {
 
 const insert = async (req, res = Response) => {
     try{
-        const {number_room, status_room, capacity} = req.body;
-        const results = await save({number_room, status_room, capacity});
+        const {movie_show_ste, client_spo, total_count, status_ste} = req.body;
+        const results = await save({movie_show_ste, client_spo, total_count, status_ste});
         res.status(200).json({results});
     }catch (err) {
         console.log(err);
@@ -50,8 +50,8 @@ const insert = async (req, res = Response) => {
 
 const modific = async (req, res = Response) => {
     try{
-        const {number_room, status_room, capacity, id_room} = req.body;
-        const results = await update({number_room, status_room, capacity, id_room});
+        const {movie_show_ste, client_spo, total_count, status_ste, id_ste} = req.body;
+        const results = await update({movie_show_ste, client_spo, total_count, status_ste, id_ste});
         res.status(200).json({results});
     }catch (err) {
         console.log(err);
@@ -84,15 +84,15 @@ const ena = async (req, res = Response) => {
     }
 };
 
-const roomRouter = Router();
-roomRouter.get(`/all`, [], getAll);
-roomRouter.get(`/all/enable`, [], getEnable);
-roomRouter.get(`/:id`, [], getById);
-roomRouter.post(`/save`, [], insert);
-roomRouter.put(`/update`, [], modific);
-roomRouter.put(`/disable/:id`, [], disa);
-roomRouter.put(`/enable/:id`, [], ena);
+const salesTicketsRouter = Router();
+salesTicketsRouter.get(`/all`, [], getAll);
+salesTicketsRouter.get(`/all/enable`, [], getEnable);
+salesTicketsRouter.get(`/:id`, [], getById);
+salesTicketsRouter.post(`/save`, [], insert);
+salesTicketsRouter.put(`/update`, [], modific);
+salesTicketsRouter.put(`/disable/:id`, [], disa);
+salesTicketsRouter.put(`/enable/:id`, [], ena);
 
 module.exports = {
-    roomRouter,
+    salesTicketsRouter,
 };
