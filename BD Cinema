@@ -95,22 +95,23 @@ update movie_shows set availability_msw = 0 where id_msw = 1; -- Inhabilitar
 update movie_shows set availability_msw = 1 where id_msw = 1; -- Habilitar
 
 -- cet--------------------------------------------------------------------------
-create table clients(
-	id_cet int primary key not null auto_increment,
-    name_cet varchar(100) not null,
-    email_cet varchar(100) not null,
-    password_cet varchar(100) not null,
-    status_cet tinyint not null,
-    role_cet int not null
+create table users(
+	id_usr int primary key not null auto_increment,
+    name_usr varchar(100) not null,
+    email_usr varchar(100) not null,
+    password_usr varchar(100) not null,
+    status_usr tinyint not null,
+    role_cet int not null,
+    saldo_usr double
 );
 
-select * from clients; -- All
-select * from clients where id_cet = 1; -- Id
-select * from clients where status_cet = 1; -- Status
-insert into clients(name_cet, email_cet, password_cet, status_cet, role_cet) values("Edson", "edson@gmail.com", "123456789", 1, 1); -- Save
-update clients set name_cet = "Emiliano Ortiz", email_cet = "emiliano@gmail.com", password_cet = "987654321", status_cet = 1, role_cet = 2 where id_cet = 2; -- Update
-update clients set status_cet = 0 where id_cet = 1; -- Inhabilitar
-update clients set status_cet = 1 where id_cet = 1; -- Habilitar
+select * from users; -- All
+select * from users where id_usr = 1; -- Id
+select * from users where status_usr = 1; -- Status
+insert into users(name_usr, email_usr, password_usr, status_usr, role_usr, saldo_usr) values("Edson", "edson@gmail.com", "123456789", 1, 1, 200.0); -- Save
+update users set name_usr = "David Rosales", email_usr = "david@gmail.com", password_usr = "741852963", status_usr = 1, role_usr = 2, saldo_usr = 200.0 where id_usr = 3; -- Update
+update users set status_usr = 0 where id_usr = 1; -- Inhabilitar
+update users set status_usr = 1 where id_usr = 1; -- Habilitar
 
 -- ste-----------------------------------------------------------------------------
 create table sales_tickets(
